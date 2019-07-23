@@ -1,37 +1,46 @@
 console.log('\'Allo \'Allo!');
 $(document).ready(function () {
-  // Get configuration
-  var base_url;
-  $.ajax({
-    type: 'GET',
-    url: 'https://api.themoviedb.org/3/configuration?api_key=d5d44ba71ba42d221748536faf51c078',
-    success: function (data) {
-      findImg(data.images);
-    },
-    error: function (XMLHttpRequest) {
-      console.log('error', XMLHttpRequest);
+  // Limit Helper to only include top 5 for HB
+  Handlebars.registerHelper('limit', function (arr, limit) {
+    if (!Array.isArray(arr)) {
+      return [];
     }
-  });
-  $.ajax({
-    type: 'GET',
-    url: 'https://api.themoviedb.org/3/movie/420818?api_key=d5d44ba71ba42d221748536faf51c078&append_to_response=videos',
-    success: function (data) {
-      console.log('data', data);
-      console.log('data', data.videos.results[0].key);
-      var template = Handlebars.templates['tabs.hbs'](data);
-      $("#content-holder").html('').html(template);
-    },
-    error: function (XMLHttpRequest) {
-      console.log('error', XMLHttpRequest);
-    }
-  }); // Call Config API
 
-  function findImg(config) {
-    console.log('config', config);
-    var size = 'orginal';
-    base_url = config.base_url;
-    console.log(base_url + size);
-    return base_url;
+    return arr.slice(0, limit);
+  });
+  var api_key = 'd5d44ba71ba42d221748536faf51c078'; // var type = 'popular';
+
+  ajax('popular', 'gallery');
+
+  function ajax(type, temp) {
+    $.ajax({
+      type: 'GET',
+      url: 'https://api.themoviedb.org/3/movie/' + type + '?api_key=' + api_key + '&append_to_response=videos&language=en-US&page=1',
+      success: function (data) {
+        console.log('data', data);
+        var template = Handlebars.templates[temp + '.hbs'](data);
+        $("#content-holder").html('').html(template);
+        getDetail();
+        goBack();
+      },
+      error: function (XMLHttpRequest) {
+        console.log('error', XMLHttpRequest);
+      }
+    });
+  }
+
+  function getDetail() {
+    $('.btn').on('click', function () {
+      console.log(this);
+      var d = $(this).data('key');
+      ajax(d, 'detail');
+    });
+  }
+
+  function goBack() {
+    $('.goBack').on('click', function () {
+      ajax('popular', 'gallery');
+    });
   }
 });
 //# sourceMappingURL=main.js.map
