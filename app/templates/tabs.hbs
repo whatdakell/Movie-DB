@@ -1,1 +1,11 @@
-<div class="content-box"><p>{{content}}</p></div>
+<div class="content-box">
+	<img class="bg-image" src="http://image.tmdb.org/t/p/original{{backdrop_path}}" />
+	<div class="box-content">
+			<img src="http://image.tmdb.org/t/p/original{{poster_path}}" />
+			<div class="box-info">
+					<p>{{title}}</p>
+					<p>User Rating <span class="rating">{{vote_average}}</span></p>
+					<a href="https://www.youtube.com/embed/{{videos.results.0.key}}" target="_blank"> Play Trailer</a>
+			</div>
+	</div>
+</div>

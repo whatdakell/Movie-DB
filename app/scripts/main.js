@@ -1,50 +1,43 @@
 console.log('\'Allo \'Allo!');
 
-var data = {
-	'tabs': {
-		'tab1': {
-			id : 'tab1',
-			default: true,
-			content: 'Content 1'
-		},
-		'tab2': {
-			id : 'tab2',
-			content: 'Content 2'
-		}
-	}
-}
-
-
-
-// Query Tabs
-var tabs = document.querySelectorAll('li');
-var i;
-
-
-// Query Content Box
-var contentBox = document.querySelector('.content-box p');
-console.log(contentBox);
-
-
-
-$('.tab-list-item-link').on('click', function() {
-	var tabId = $(this)[0].getAttribute('id');
-	console.log('clicked', tabId);
-	findContent(tabId);
-});
-
-
-// Find Tab Content
-function findContent(id){
-	console.log('param', id);
-	console.log(data.tabs[id]);
-
-	var template = Handlebars.templates['tabs.hbs'](data.tabs[id]);
-	$("#content-holder").html('').html(template);
-}
-
 $(document).ready(function() {
-	findContent($('.tab-list-item-link.active').attr('id'));
-});
+	// Get configuration
 
-console.log('ta', data.tabs.length);
+	var base_url;
+	$.ajax({
+		type : 'GET',
+		url : 'https://api.themoviedb.org/3/configuration?api_key=d5d44ba71ba42d221748536faf51c078',
+		success: function(data){
+			findImg(data.images);
+		},
+		error: function(XMLHttpRequest){
+			console.log('error', XMLHttpRequest);
+		}
+	})
+
+	$.ajax({
+		type : 'GET',
+		url : 'https://api.themoviedb.org/3/movie/420818?api_key=d5d44ba71ba42d221748536faf51c078&append_to_response=videos',
+		success: function(data){
+			console.log('data',data);
+			console.log('data',data.videos.results[0].key);
+			var template = Handlebars.templates['tabs.hbs'](data);
+			$("#content-holder").html('').html(template);
+		},
+
+		error: function(XMLHttpRequest){
+			console.log('error', XMLHttpRequest);
+		}
+	})
+
+
+	// Call Config API
+	function findImg(config){
+		console.log('config', config)
+		var size = 'orginal';
+		base_url = config.base_url;
+		console.log(base_url + size);
+		return base_url;
+	}
+
+});
