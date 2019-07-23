@@ -22,6 +22,7 @@ $(document).ready(function() {
 				$("#content-holder").html('').html(template);
 				getDetail();
 				goBack();
+				controls();
 			},
 			error: function(XMLHttpRequest){
 				console.log('error', XMLHttpRequest);
@@ -40,6 +41,13 @@ $(document).ready(function() {
 	function goBack(){
 		$('.goBack').on('click', function(){
 			ajax('popular', 'gallery');
+		});
+	}
+
+	function controls(){
+		$('.mute').on('click', function(){
+			console.log('d');
+			$("video").prop('muted', false); //mute
 		});
 	}
 

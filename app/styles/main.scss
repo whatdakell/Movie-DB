@@ -11,13 +11,23 @@ body {
   color: #333;
 }
 
+#wrapper{
+	max-width: 90%;
+	margin: auto;
+}
+
 .movie-grid{
+	display: flex;
+	flex-wrap: wrap;
 	.bg-image{
 		width: 100%;
 		display: flex;
 	}
 	// bg overlay
 	.content-box{
+		&:not(:first-of-type){
+			flex: 1 1 40%;
+		}
 		position: relative;
 		&:after{
 			content: '';
