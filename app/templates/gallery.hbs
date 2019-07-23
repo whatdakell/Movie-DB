@@ -1,5 +1,6 @@
 	{{#each (limit this.results 5)}}
 		<div class="content-box" data-attribute={{id}}>
+			<span class="rank">{{math @index}}</span>
 			<img class="bg-image" src="http://image.tmdb.org/t/p/original{{backdrop_path}}" />
 			<div class="box-content">
 					<img src="http://image.tmdb.org/t/p/original{{poster_path}}" />

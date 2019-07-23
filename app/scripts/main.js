@@ -7,6 +7,10 @@ $(document).ready(function() {
 	  if (!Array.isArray(arr)) { return []; }
 	  return arr.slice(0, limit);
 	});
+	Handlebars.registerHelper("math", function(value, options)
+	{
+	    return parseInt(value) + 1;
+	});
 
 	var api_key = 'd5d44ba71ba42d221748536faf51c078';
 	// var type = 'popular';
