@@ -1,0 +1,1 @@
+"use strict";var data={tabs:[{id:"tab1",default:!0,content:"Content 1"},{id:"tab2",content:"Content 2"}]},template=Handlebars.templates["tabs.hbs"](data);$("#wrapper").append(template);
