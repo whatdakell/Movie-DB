@@ -37,13 +37,26 @@ $(document).ready(function () {
     $('.btn').on('click', function () {
       console.log(this);
       var d = $(this).data('key');
-      ajax(d, 'detail');
+      $('#content-holder').fadeOut("slow", function () {
+        ajax(d, 'detail');
+        $('#content-holder').fadeIn("slow");
+      });
+    });
+  }
+
+  function anim(func) {
+    $('#content-holder').fadeOut("slow", function () {
+      func;
+      $('#content-holder').fadeIn("slow");
     });
   }
 
   function goBack() {
     $('.goBack').on('click', function () {
-      ajax('popular', 'gallery');
+      $('#content-holder').fadeOut("slow", function () {
+        ajax('popular', 'gallery');
+        $('#content-holder').fadeIn("slow");
+      });
     });
   }
 

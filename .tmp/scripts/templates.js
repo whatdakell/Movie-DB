@@ -30,7 +30,7 @@
         name: "overview",
         hash: {},
         data: n
-      }) : i)) + '</p>\n						</div>\n					</div>\n					<a class="goBack">Go Back</a>\n			</div>\n	</div>\n</div>\n';
+      }) : i)) + '</p>\n							<a class="goBack">Go Back</a>\n						</div>\n					</div>\n			</div>\n	</div>\n</div>\n';
     },
     useData: !0
   }), l["gallery.hbs"] = a({
