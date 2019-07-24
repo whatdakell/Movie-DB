@@ -37,31 +37,47 @@
         name: "id",
         hash: {},
         data: e
-      }) : s)) + '>\n			<span class="rank">' + r((l.math || a && a.math || o).call(a, e && e.index, {
-        name: "math",
-        hash: {},
-        data: e
-      })) + '</span>\n			<img class="bg-image" src="http://image.tmdb.org/t/p/original' + r((s = null != (s = l.backdrop_path || (null != a ? a.backdrop_path : a)) ? s : o, typeof s === i ? s.call(a, {
+      }) : s)) + " style=\"background-image: url('http://image.tmdb.org/t/p/original/" + r((s = null != (s = l.backdrop_path || (null != a ? a.backdrop_path : a)) ? s : o, typeof s === i ? s.call(a, {
         name: "backdrop_path",
         hash: {},
         data: e
-      }) : s)) + '" />\n			<div class="box-content">\n					<img src="http://image.tmdb.org/t/p/original' + r((s = null != (s = l.poster_path || (null != a ? a.poster_path : a)) ? s : o, typeof s === i ? s.call(a, {
+      }) : s)) + '\');">\n\n\n			<!-- <img class="bg-image" src="http://image.tmdb.org/t/p/original' + r((s = null != (s = l.backdrop_path || (null != a ? a.backdrop_path : a)) ? s : o, typeof s === i ? s.call(a, {
+        name: "backdrop_path",
+        hash: {},
+        data: e
+      }) : s)) + '" /> -->\n\n			<div class="box-content">\n					<!-- <img src="http://image.tmdb.org/t/p/original' + r((s = null != (s = l.poster_path || (null != a ? a.poster_path : a)) ? s : o, typeof s === i ? s.call(a, {
         name: "poster_path",
         hash: {},
         data: e
-      }) : s)) + '" />\n					<div class="box-info">\n							<p>' + r((s = null != (s = l.title || (null != a ? a.title : a)) ? s : o, typeof s === i ? s.call(a, {
-        name: "title",
-        hash: {},
-        data: e
-      }) : s)) + '</p>\n							<p>User Rating <span class="rating">' + r((s = null != (s = l.vote_average || (null != a ? a.vote_average : a)) ? s : o, typeof s === i ? s.call(a, {
+      }) : s)) + '" /> -->\n					<span class="rating">' + r((s = null != (s = l.vote_average || (null != a ? a.vote_average : a)) ? s : o, typeof s === i ? s.call(a, {
         name: "vote_average",
         hash: {},
         data: e
-      }) : s)) + '</span></p>\n							<button class="btn" data-key=' + r((s = null != (s = l.id || (null != a ? a.id : a)) ? s : o, typeof s === i ? s.call(a, {
+      }) : s)) + '</span>\n					<div class="box-info">\n							<h1>' + r((s = null != (s = l.title || (null != a ? a.title : a)) ? s : o, typeof s === i ? s.call(a, {
+        name: "title",
+        hash: {},
+        data: e
+      }) : s)) + '</h1>\n\n							<div class="movie-info">\n								<span class="rank">0' + r((l.math || a && a.math || o).call(a, e && e.index, {
+        name: "math",
+        hash: {},
+        data: e
+      })) + '</span>\n								<div class="small-detail">\n									<p>release date : ' + r((s = null != (s = l.release_date || (null != a ? a.release_date : a)) ? s : o, typeof s === i ? s.call(a, {
+        name: "release_date",
+        hash: {},
+        data: e
+      }) : s)) + "</p>\n									<p>popularity : " + r((s = null != (s = l.popularity || (null != a ? a.popularity : a)) ? s : o, typeof s === i ? s.call(a, {
+        name: "popularity",
+        hash: {},
+        data: e
+      }) : s)) + '</p>\n									<button class="btn" data-key=' + r((s = null != (s = l.id || (null != a ? a.id : a)) ? s : o, typeof s === i ? s.call(a, {
         name: "id",
         hash: {},
         data: e
-      }) : s)) + '> Learn More</button>\n							<!-- <a href="https://www.youtube.com/embed/' + r(p(null != (n = null != (n = null != (n = null != a ? a.videos : a) ? n.results : n) ? n["0"] : n) ? n.key : n, a)) + '" target="_blank"> Play Trailer</a> -->\n					</div>\n			</div>\n		</div>\n';
+      }) : s)) + '> Learn More</button>\n								</div>\n							</div>\n							<!-- <button class="btn" data-key=' + r((s = null != (s = l.id || (null != a ? a.id : a)) ? s : o, typeof s === i ? s.call(a, {
+        name: "id",
+        hash: {},
+        data: e
+      }) : s)) + '> Learn More</button> -->\n							<!-- <a href="https://www.youtube.com/embed/' + r(p(null != (n = null != (n = null != (n = null != a ? a.videos : a) ? n.results : n) ? n["0"] : n) ? n.key : n, a)) + '" target="_blank"> Play Trailer</a> -->\n					</div>\n			</div>\n		</div>\n';
     },
     compiler: [6, ">= 2.0.0-beta.1"],
     main: function (a, l, t, e) {
