@@ -12,20 +12,25 @@ $(document).ready(function() {
 	    return parseInt(value) + 1;
 	});
 
-	var api_key = 'd5d44ba71ba42d221748536faf51c078';
+	const api_key = 'd5d44ba71ba42d221748536faf51c078';
 
-	ajax('popular', 'gallery');
-	function ajax(type, temp){
+	function bind(){
+		$(document).on('click', '.btn', function(){
+			var d = $(this).data('key');
+			renderData(d , 'detail');
+		})
+		$(document).on('click', '.goBack', function(){
+			renderData('popular', 'gallery');
+		})
+	}
+	function renderData(type, temp){
 		$.ajax({
 			type : 'GET',
-			url : 'https://api.themoviedb.org/3/movie/'+ type + '?api_key='+ api_key + '&append_to_response=videos&language=en-US&page=1',
+			url : `https://api.themoviedb.org/3/movie/${type}?api_key=${api_key}&append_to_response=videos&language=en-US&page=1`,
 			success: function(data){
 				console.log('data',data);
 				var template = Handlebars.templates[temp + '.hbs'](data);
-
 				$("#content-holder").html('').html(template);
-				getDetail();
-				goBack();
 			},
 			error: function(XMLHttpRequest){
 				console.log('error', XMLHttpRequest);
@@ -33,24 +38,7 @@ $(document).ready(function() {
 		})
 	}
 
-	function getDetail(){
-		$('.btn').on('click', function(){
-			console.log(this);
-			var d = $(this).data('key');
-			$('#content-holder').fadeOut("slow" , function(){
-				ajax(d , 'detail');
-				$('#content-holder').fadeIn("slow");
-			});
-		});
-	}
-
-	function goBack(){
-		$('.goBack').on('click', function(){
-			$('#content-holder').fadeOut("slow" , function(){
-				ajax('popular', 'gallery');
-				$('#content-holder').fadeIn("slow");
-			});
-		});
-	}
+	renderData('popular', 'gallery');
+	bind();
 
 });
