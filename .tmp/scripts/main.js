@@ -13,7 +13,7 @@ $(document).ready(function () {
   });
   var api_key = 'd5d44ba71ba42d221748536faf51c078'; // var type = 'popular';
 
-  ajax('popular', 'gallery');
+  ajax('popular', 'gallery'); // anim('popular', 'gallery');
 
   function ajax(type, temp) {
     $.ajax({
@@ -36,7 +36,8 @@ $(document).ready(function () {
   function getDetail() {
     $('.btn').on('click', function () {
       console.log(this);
-      var d = $(this).data('key');
+      var d = $(this).data('key'); // anim(d , 'detail');
+
       $('#content-holder').fadeOut("slow", function () {
         ajax(d, 'detail');
         $('#content-holder').fadeIn("slow");
@@ -44,15 +45,24 @@ $(document).ready(function () {
     });
   }
 
-  function anim(func) {
-    $('#content-holder').fadeOut("slow", function () {
-      func;
-      $('#content-holder').fadeIn("slow");
-    });
+  function anim(a) {
+    $("#content-holder").html('').html(a); // $('#content-holder').fadeOut("slow" , ajax(a, b));
+
+    console.log(a); // ajax(a , b)
+
+    $('#content-holder').fadeIn("slow"); // $('#content-holder').fadeOut("slow" , ajax(a, b));
+    // $('#content-holder').fadeOut("slow" , function(a, b){
+    // 	console.log(a,b);
+    // 	ajax(a , b);
+    // 	$('#content-holder').fadeIn("slow");
+    // });
+    // $('#content-holder').fadeIn("slow");
+    // $('#content-holder').fadeIn("slow");
   }
 
   function goBack() {
     $('.goBack').on('click', function () {
+      // anim('popular', 'gallery');
       $('#content-holder').fadeOut("slow", function () {
         ajax('popular', 'gallery');
         $('#content-holder').fadeIn("slow");
