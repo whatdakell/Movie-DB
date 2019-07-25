@@ -1,0 +1,18 @@
+
+<div class="content-box" data-attribute={{id}} style="background-image: url('http://image.tmdb.org/t/p/original/{{backdrop_path}}');">
+	<div class="box-content">
+			<span class="rating">{{vote_average}}</span>
+			<div class="box-info">
+					<h1>{{title}}</h1>
+
+					<div class="movie-info">
+						<span class="rank">0{{math @index}}</span>
+						<div class="small-detail">
+							<p>release date : {{release_date}}</p>
+							<p>popularity : {{popularity}}</p>
+							<a class="btn" data-key={{id}}> Learn More</a>
+						</div>
+					</div>
+			</div>
+	</div>
+</div>

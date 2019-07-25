@@ -28,6 +28,9 @@ $(document).ready(function () {
       type: 'GET',
       url: `https://api.themoviedb.org/3/movie/${type}?api_key=${api_key}&append_to_response=videos&language=en-US&page=1`,
       success: function (data) {
+        if (type === 'popular') {}
+
+        populardata = data;
         console.log('data', data);
         var template = Handlebars.templates[temp + '.hbs'](data);
         $("#content-holder").html('').html(template);
