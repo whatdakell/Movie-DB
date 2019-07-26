@@ -1,5 +1,6 @@
+<h1>Top 5 Popular Movies</h1>
 {{#each (limit this.results 5)}}
-	<div class="content-box" data-attribute={{id}} style="background-image: url('http://image.tmdb.org/t/p/original/{{backdrop_path}}');">
+	<div class="content-box" data-attribute={{id}} style="background-image: url('http://image.tmdb.org/t/p/original/{{#if backdrop_path}}{{backdrop_path}}{{else}}{{poster_path}}{{/if}}');">
 		{{> gallery-item this}}
 	</div>
 {{/each}}

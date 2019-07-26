@@ -1,14 +1,17 @@
-<iframe class="bg-image" width="100vh" height="100%" src="http://www.youtube.com/embed/{{videos.results.0.key}}?autoplay=1&controls=0&showinfo=0&loop=1&autohide=1&mute=1" frameborder="0" allowfullscreen autoplay></iframe>
+
+{{#if videos.results.0.key}}
+	<iframe class="bg-image" width="100vh" height="100%" src="http://www.youtube.com/embed/{{videos.results.0.key}}?autoplay=1&controls=0&showinfo=0&loop=1&autohide=1&mute=1" frameborder="0" allowfullscreen autoplay></iframe>
+{{/if}}
 <div class="box-content">
 		<div class="box-info">
-				<h1>{{title}}</h1>
+				<h2>{{title}}</h2>
 				<div class="movie-info">
 					<img src="http://image.tmdb.org/t/p/original{{poster_path}}" />
 					<div class="small-detail">
-						<h2>{{tagline}}</h2>
-						<p>runtime : {{runtime}} minutes</p>
+						<h3>{{tagline}}</h3>
+						{{#if runtime}}<p>runtime : {{runtime}} minutes</p>{{/if}}
 						<p class="description">{{overview}}</p>
-						<a class="goBack" data-key={{id}}>Go Back</a>
+						<button class="goBack" data-key={{id}}>Go Back</button>
 					</div>
 				</div>
 		</div>

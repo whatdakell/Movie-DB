@@ -1,14 +1,14 @@
 <div class="box-content">
 		<span class="rating">{{vote_average}}</span>
 		<div class="box-info">
-				<h1>{{title}}</h1>
+				<h2>{{title}}</h2>
 
 				<div class="movie-info">
-					<span class="rank">0{{math @index}}</span>
+					<span class="rank">{{index}}</span>
 					<div class="small-detail">
 						<p>release date : {{release_date}}</p>
 						<p>popularity : {{popularity}}</p>
-						<a class="btn" data-key={{id}}> Learn More</a>
+						<button class="btn" data-key={{id}}> Learn More</button>
 					</div>
 				</div>
 		</div>

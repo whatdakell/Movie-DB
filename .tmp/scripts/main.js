@@ -1,7 +1,5 @@
-console.log('\'Allo \'Allo!');
 $(document).ready(function () {
-  Handlebars.registerPartial('gallery-item', Handlebars.templates['gallery-item.hbs']); // Limit Helper to only include top 5 for HB
-
+  Handlebars.registerPartial('gallery-item', Handlebars.templates['gallery-item.hbs']);
   Handlebars.registerHelper('limit', function (arr, limit) {
     if (!Array.isArray(arr)) {
       return [];
@@ -22,42 +20,47 @@ $(document).ready(function () {
   function btnClick($class, template) {
     $(document).on('click', $class, function () {
       var itemKey = $(this).data('key');
-      var $self = $(this);
-      var $container = $self.closest('.content-box');
+      var $container = $(this).closest('.content-box');
       renderData($container, itemKey, template);
     });
   }
 
+  function renderTemplate(selector, temp, data) {
+    var template = Handlebars.templates[temp + '.hbs'](data);
+    $(selector).html('').html(template);
+  }
+
   function renderData(selector, type, temp) {
-    // Retrieve Cache
-    var popularCacheJSON = sessionStorage.getItem('popularCache');
-    var popularCacheArray = JSON.parse(popularCacheJSON);
-    console.log('pop', popularCacheArray); // if gallery-item retrive the matching id from cache and render template
+    switch (temp) {
+      case 'gallery-item':
+        var galleryItemDataObj = JSON.parse(sessionStorage.getItem('popularCache')).filter(element => element.id == type)[0];
+        console.log('test', JSON.parse(sessionStorage.getItem('popularCache')).filter(element => element.id == type)[0]);
+        renderTemplate(selector, temp, galleryItemDataObj);
+        break;
 
-    if (temp == 'gallery-item') {
-      var filteredID = popularCache.filter(element => element.id == type);
-      var template = Handlebars.templates[temp + '.hbs'](filteredID[0]);
-      $(selector).html('').html(template);
-    } else {
-      $.ajax({
-        type: 'GET',
-        url: `https://api.themoviedb.org/3/movie/${type}?api_key=${api_key}&append_to_response=videos&language=en-US&page=1`,
-        success: function (data) {
-          console.log('AJAX CALL');
+      case 'gallery':
+      case 'detail':
+        $.ajax({
+          type: 'GET',
+          url: `https://api.themoviedb.org/3/movie/${type}?api_key=${api_key}&append_to_response=videos&language=en-US&page=1`,
+          success: function (data) {
+            console.log('AJAX CALL');
 
-          if (type === 'popular') {
-            console.log('data', data);
-            popularCache = data.results;
-            sessionStorage.setItem('popularCache', JSON.stringify(popularCache));
+            if (type === 'popular') {
+              var newObj = data.results.map(function (obj, index) {
+                obj['index'] = (index < 9 ? '0' : '') + (index + 1);
+                return obj;
+              });
+              sessionStorage.setItem('popularCache', JSON.stringify(newObj));
+            }
+
+            renderTemplate(selector, temp, data);
+          },
+          error: function (XMLHttpRequest) {
+            console.log('error', XMLHttpRequest);
           }
-
-          var template = Handlebars.templates[temp + '.hbs'](data);
-          $(selector).html('').html(template);
-        },
-        error: function (XMLHttpRequest) {
-          console.log('error', XMLHttpRequest);
-        }
-      });
+        });
+        break;
     }
   }
 
