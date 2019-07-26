@@ -12,41 +12,31 @@ $(document).ready(function () {
   Handlebars.registerHelper("math", function (value, options) {
     return parseInt(value) + 1;
   });
-  const api_key = 'd5d44ba71ba42d221748536faf51c078';
+  const api_key = 'd5d44ba71ba42d221748536faf51c078'; // Click Events
 
   function bind() {
-    $(document).on('click', '.btn', function () {
+    btnClick('.btn', 'detail');
+    btnClick('.goBack', 'gallery-item');
+  }
+
+  function btnClick($class, template) {
+    console.log('got it');
+    $(document).on('click', $class, function () {
       var d = $(this).data('key');
       var $self = $(this);
       var $container = $self.closest('.content-box');
-      renderData($container, d, 'detail');
-    });
-    $(document).on('click', '.goBack', function () {
-      console.log(this);
-      var d = $(this).data('key'); // console.log(d);
-
-      var $self = $(this);
-      var $container = $self.closest('.content-box');
-      renderData($container, d, 'gallery-item'); // var popularCacheJSON = sessionStorage.getItem('PopularCacheAPI');
-      // var popularCache = JSON.parse(popularCacheJSON);
-      // var popularCacheJSON = sessionStorage.getItem('PopularCacheAPI');
-      // var popularCache = JSON.parse(popularCacheJSON);
-      //
-      //
-      // var filteredID = popularCache.filter(filterByID);
+      renderData($container, d, template);
     });
   }
 
   function renderData(selector, type, temp) {
+    // Retrieve Cache
     var popularCacheJSON = sessionStorage.getItem('popCache');
     var popularCache = JSON.parse(popularCacheJSON);
-    console.log('pop', popularCache);
+    console.log('pop', popularCache); // if gallery-item retrive the matching id from cache and render template
 
     if (temp == 'gallery-item') {
-      var filteredID = popularCache.filter(function (element) {
-        return filterByID(element, type);
-      });
-      console.log(filteredID[0]);
+      var filteredID = popularCache.filter(element => element.id == type);
       var template = Handlebars.templates[temp + '.hbs'](filteredID[0]);
       $(selector).html('').html(template);
     } else {
@@ -58,13 +48,7 @@ $(document).ready(function () {
             console.log('data', data);
             popCache = data.results;
             sessionStorage.setItem('popCache', JSON.stringify(popCache));
-          } // if (data.results){
-          // 	var resultsArray = data.results;
-          // 	sessionStorage.setItem('resultsArray', resultsArray);
-          // 	var filteredID = resultsArray.filter(filterByID);
-          // 	console.log('filtered',filteredID);
-          // }
-
+          }
 
           var template = Handlebars.templates[temp + '.hbs'](data);
           $(selector).html('').html(template);
@@ -74,12 +58,6 @@ $(document).ready(function () {
         }
       });
     }
-  }
-
-  function filterByID(element, a) {
-    // console.log('in', a);
-    // console.log(element.id);
-    return element.id == a;
   }
 
   renderData('#content-holder', 'popular', 'gallery');
