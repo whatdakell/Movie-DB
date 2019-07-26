@@ -15,6 +15,7 @@ $(document).ready(function() {
 	});
 
 	const api_key = 'd5d44ba71ba42d221748536faf51c078';
+
 	// Click Events
 	function bind(){
 		btnClick('.btn', 'detail');
@@ -22,7 +23,6 @@ $(document).ready(function() {
 	}
 
 	function btnClick($class, template){
-		console.log('got it');
 		$(document).on('click', $class , function(){
 			var d = $(this).data('key');
 			var $self = $(this);
@@ -32,7 +32,6 @@ $(document).ready(function() {
 	}
 
 	function renderData(selector, type, temp){
-
 		// Retrieve Cache
 		var popularCacheJSON = sessionStorage.getItem('popCache');
 		var popularCache = JSON.parse(popularCacheJSON);
@@ -49,6 +48,7 @@ $(document).ready(function() {
 				type : 'GET',
 				url : `https://api.themoviedb.org/3/movie/${type}?api_key=${api_key}&append_to_response=videos&language=en-US&page=1`,
 				success: function(data){
+					console.log('AJAX CALL');
 					if (type === 'popular') {
 						console.log('data',data);
 						popCache = data.results;

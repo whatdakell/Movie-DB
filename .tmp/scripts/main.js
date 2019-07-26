@@ -20,7 +20,6 @@ $(document).ready(function () {
   }
 
   function btnClick($class, template) {
-    console.log('got it');
     $(document).on('click', $class, function () {
       var d = $(this).data('key');
       var $self = $(this);
@@ -44,6 +43,8 @@ $(document).ready(function () {
         type: 'GET',
         url: `https://api.themoviedb.org/3/movie/${type}?api_key=${api_key}&append_to_response=videos&language=en-US&page=1`,
         success: function (data) {
+          console.log('AJAX CALL');
+
           if (type === 'popular') {
             console.log('data', data);
             popCache = data.results;
