@@ -21,18 +21,18 @@ $(document).ready(function () {
 
   function btnClick($class, template) {
     $(document).on('click', $class, function () {
-      var d = $(this).data('key');
+      var itemKey = $(this).data('key');
       var $self = $(this);
       var $container = $self.closest('.content-box');
-      renderData($container, d, template);
+      renderData($container, itemKey, template);
     });
   }
 
   function renderData(selector, type, temp) {
     // Retrieve Cache
-    var popularCacheJSON = sessionStorage.getItem('popCache');
-    var popularCache = JSON.parse(popularCacheJSON);
-    console.log('pop', popularCache); // if gallery-item retrive the matching id from cache and render template
+    var popularCacheJSON = sessionStorage.getItem('popularCache');
+    var popularCacheArray = JSON.parse(popularCacheJSON);
+    console.log('pop', popularCacheArray); // if gallery-item retrive the matching id from cache and render template
 
     if (temp == 'gallery-item') {
       var filteredID = popularCache.filter(element => element.id == type);
@@ -47,8 +47,8 @@ $(document).ready(function () {
 
           if (type === 'popular') {
             console.log('data', data);
-            popCache = data.results;
-            sessionStorage.setItem('popCache', JSON.stringify(popCache));
+            popularCache = data.results;
+            sessionStorage.setItem('popularCache', JSON.stringify(popularCache));
           }
 
           var template = Handlebars.templates[temp + '.hbs'](data);
