@@ -1,6 +1,5 @@
 {{#each (limit this.results 5)}}
-	<!-- <div>p</div> -->
-		<div class="content-box" data-attribute={{id}} >
-			{{> gallery-item this}}
-		</div>
+	<div class="content-box" data-attribute={{id}} style="background-image: url('http://image.tmdb.org/t/p/original/{{backdrop_path}}');">
+		{{> gallery-item this}}
+	</div>
 {{/each}}
